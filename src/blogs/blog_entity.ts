@@ -6,4 +6,5 @@ export class Post {
     timeRead: string
     imagePost: string
     content: string
+    author: string
 }
