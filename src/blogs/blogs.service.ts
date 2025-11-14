@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Post } from './blog_entity';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class BlogsService {
     getPost(id: string): Post {
         const post = this.blogs.find((blog) => blog.id === id);
         if (!post) {
-            throw new Error('Post not found');
+            throw new NotFoundException('Post not found');
         }
         return post;
     }
