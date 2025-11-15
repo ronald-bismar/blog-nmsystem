@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
+import { Section } from '../section/entities';
 
 @Entity()
 export class Post {
@@ -20,8 +22,8 @@ export class Post {
   @Column()
   imagePost: string;
 
-  @Column({ type: 'text' })
-  content: string;
+  @OneToMany(type => Section, section => section.post)
+  section: Section[];
 
   @Column()
   author: string;

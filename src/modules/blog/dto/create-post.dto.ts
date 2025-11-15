@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsString, IsUrl } from 'class-validator';
+import { Section } from 'src/modules/section/entities';
 
 export class CreatePostDto {
   @IsString()
@@ -19,7 +20,7 @@ export class CreatePostDto {
 
   @IsString()
   @IsNotEmpty()
-  readonly content: string;
+  readonly section: Section[];
 
   @IsString()
   readonly author: string;

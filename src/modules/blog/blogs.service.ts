@@ -12,11 +12,11 @@ export class BlogsService {
     constructor(@InjectRepository(Post) private readonly postRepository: Repository<Post>){  }
 
     async getPosts():Promise <Post[]> {
-        return await this.postRepository.find();
+        return await this.postRepository.find({relations: ['section']});
     }
 
     async getPost(id: string): Promise<Post> {
-        const post = await this.postRepository.findOneBy({id});
+        const post = await this.postRepository.findOne({where: {id}, relations: ['section']});
         if (!post) {
             throw new NotFoundException('Post not found');
         }

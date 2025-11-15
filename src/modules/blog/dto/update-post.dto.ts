@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsOptional, IsString, IsUrl } from 'class-validator';
+import { Section } from 'src/modules/section/entities';
 
 export class UpdatePostDto {
   @IsOptional()
@@ -25,7 +26,7 @@ export class UpdatePostDto {
   @IsOptional()
   @IsString()
   @IsNotEmpty()
-  readonly content?: string;
+  readonly content?: Section[];
 
   @IsOptional()
   @IsString()
