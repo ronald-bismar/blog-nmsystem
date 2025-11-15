@@ -8,7 +8,10 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({
     transform: true,
     whitelist: true,
-    forbidNonWhitelisted: true
+    forbidNonWhitelisted: true,
+    transformOptions: {
+      enableImplicitConversion: true //Esto es porque los numbers se envian como string, con esto no habra problema se recibirá number
+    }
   }))
 
   await app.listen(process.env.PORT ?? 3000);

@@ -1,16 +1,15 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
 import { Post as PostEntity } from 'src/modules/blog/blog_entity';
 import { BlogsService } from 'src/modules/blog/blogs.service';
-import { CreatePostDto, UpdatePostDto } from './dto';
+import { CreatePostDto, PaginationQueryDto, UpdatePostDto } from './dto';
 
 @Controller('blogs')
 export class BlogController {
     constructor(private readonly blogService: BlogsService) { }
 
     @Get()
-    getPosts(@Query() filterQuery): Promise<PostEntity[]> {
-        const { searchTerm, orderBy } = filterQuery
-        return this.blogService.getPosts();
+    getPosts(@Query() pagination: PaginationQueryDto): Promise<PostEntity[]> {
+        return this.blogService.getPosts(pagination);
     }
 
     @Get(':id')

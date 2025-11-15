@@ -4,15 +4,15 @@ import { randomUUID } from 'crypto';
 import { Repository } from 'typeorm';
 
 import { Post } from './blog_entity';
-import { CreatePostDto, UpdatePostDto } from './dto';
+import { CreatePostDto, PaginationQueryDto, UpdatePostDto } from './dto';
 
 @Injectable()
 export class BlogsService {
 
     constructor(@InjectRepository(Post) private readonly postRepository: Repository<Post>){  }
 
-    async getPosts():Promise <Post[]> {
-        return await this.postRepository.find({relations: ['section']});
+    async getPosts({limit, offset}: PaginationQueryDto):Promise <Post[]> {
+        return await this.postRepository.find({relations: ['section'], skip: offset, take: limit});
     }
 
     async getPost(id: string): Promise<Post> {
