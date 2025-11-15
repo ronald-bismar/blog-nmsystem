@@ -20,6 +20,13 @@ export const DatabaseProvider: DynamicModule = TypeOrmModule.forRootAsync({
             autoLoadEntities: true,
             synchronize: isDevelopmentEnv,
             loggin: config.get('DB_LOGGIN'),
+            ssl: config.get('DB_SSL') === 'true',
+            extra: {
+                ssl:  config.get('DB_SSL') === 'true'?
+                {
+                    rejectUnauthorized: false,
+                } : null
+            }
         } as ConnectOptions
 
         return dbConfig
