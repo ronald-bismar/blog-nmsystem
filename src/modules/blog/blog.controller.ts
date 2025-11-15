@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
-import { Post as PostEntity } from 'src/blogs/blog_entity';
-import { BlogsService } from 'src/blogs/blogs.service';
+import { Post as PostEntity } from 'src/modules/blog/blog_entity';
+import { BlogsService } from 'src/modules/blog/blogs.service';
+import { CreatePostDto, UpdatePostDto } from './dto';
 
 @Controller('blogs')
 export class BlogController {
@@ -19,12 +20,13 @@ export class BlogController {
 
     @Post()
     @HttpCode(HttpStatus.NO_CONTENT)
-    createBlog(@Body() post: PostEntity) {
+    createPost(@Body() post: CreatePostDto) {
         this.blogService.createPost(post);
     }
+
     @Put(':id')
     @HttpCode(HttpStatus.NO_CONTENT)
-    updateBlog(@Param('id') id: string, @Body() post: PostEntity): PostEntity {
+    updatePost(@Param('id') id: string, @Body() post: UpdatePostDto): PostEntity {
         return this.blogService.updatePost(id, post);
     }
     @Delete(':id')

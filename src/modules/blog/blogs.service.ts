@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { randomUUID } from 'crypto';
 import { Post } from './blog_entity';
+import { CreatePostDto, UpdatePostDto } from './dto';
 
 @Injectable()
 export class BlogsService {
@@ -19,6 +21,7 @@ export class BlogsService {
     getPosts(): Post[] {
         return this.blogs;
     }
+
     getPost(id: string): Post {
         const post = this.blogs.find((blog) => blog.id === id);
         if (!post) {
@@ -26,16 +29,28 @@ export class BlogsService {
         }
         return post;
     }
-    createPost(post: Post): void {
-        this.blogs.push(post);
+
+    createPost(dto: CreatePostDto): Post {
+        const newPost: Post = {
+            id: randomUUID(),
+            ...dto
+        }
+        this.blogs.push(newPost);
+        return newPost
     }
-    updatePost(id: string, post: Post): Post {
-        const postFinded = this.getPost(id);
-        Object.assign(postFinded, post);
-        return postFinded;
+
+    updatePost(id: string, dto: UpdatePostDto): Post {
+        const post = this.getPost(id);
+        Object.assign(post, dto);
+        return post;
     }
+
     deletePost(id: string): void {
         const index = this.blogs.findIndex((blog) => blog.id === id);
+        if(index === -1){
+            throw new NotFoundException(`Post with ID ${id} not found`);
+        }
+        
         this.blogs.splice(index, 1);
     }
 
