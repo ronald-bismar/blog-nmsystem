@@ -12,20 +12,21 @@ export const DatabaseProvider: DynamicModule = TypeOrmModule.forRootAsync({
 
         const dbConfig = {
             type: 'postgres',
-            host: config.get('DB_HOST'),
-            port: config.get('DB_PORT'),
-            username: config.get('DB_USER'),
-            password: config.get('DB_PASSWORD'),
-            database: config.get('DB_NAME'),
+            url: config.get('DATABASE_URL'),
+            // host: config.get('DB_HOST'),
+            // port: config.get('DB_PORT'),
+            // username: config.get('DB_USER'),
+            // password: config.get('DB_PASSWORD'),
+            // database: config.get('DB_NAME'),
             autoLoadEntities: true,
             synchronize: isDevelopmentEnv,            
             loggin: config.get('DB_LOGGIN') === 'true',
-            ssl: true,
+            ssl: config.get('DB_SSL') === 'true',
             extra: {
-                ssl: 
+                ssl:  config.get('DB_SSL') === 'true'?
                 {
                     rejectUnauthorized: false,
-                }
+                } : null
             }
         } as ConnectOptions
 
