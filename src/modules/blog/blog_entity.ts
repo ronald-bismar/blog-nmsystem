@@ -1,10 +1,28 @@
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
+@Entity()
 export class Post {
-    id: string
-    title: string
-    subtitle: string
-    datePost: string
-    timeRead: string
-    imagePost: string
-    content: string
-    author: string
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column()
+  title: string;
+
+  @Column({ nullable: true })
+  subtitle: string;
+
+  @Column()
+  datePost: string;
+
+  @Column()
+  timeRead: string;
+
+  @Column()
+  imagePost: string;
+
+  @Column({ type: 'text' })
+  content: string;
+
+  @Column()
+  author: string;
 }

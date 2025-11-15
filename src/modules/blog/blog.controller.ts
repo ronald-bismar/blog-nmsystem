@@ -8,13 +8,13 @@ export class BlogController {
     constructor(private readonly blogService: BlogsService) { }
 
     @Get()
-    getPosts(@Query() filterQuery): PostEntity[] {
+    getPosts(@Query() filterQuery): Promise<PostEntity[]> {
         const { searchTerm, orderBy } = filterQuery
         return this.blogService.getPosts();
     }
 
     @Get(':id')
-    getPost(@Param('id') id: string): PostEntity {
+    getPost(@Param('id') id: string): Promise<PostEntity> {
         return this.blogService.getPost(id);
     }
 
@@ -26,12 +26,12 @@ export class BlogController {
 
     @Put(':id')
     @HttpCode(HttpStatus.NO_CONTENT)
-    updatePost(@Param('id') id: string, @Body() post: UpdatePostDto): PostEntity {
+    updatePost(@Param('id') id: string, @Body() post: UpdatePostDto): Promise<PostEntity> {
         return this.blogService.updatePost(id, post);
     }
     @Delete(':id')
     @HttpCode(HttpStatus.NO_CONTENT)
-    deleteBlog(@Param('id') id: string) {
+    deleteBlog(@Param('id') id: string){
         this.blogService.deletePost(id);
     }
 }
