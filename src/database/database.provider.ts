@@ -3,7 +3,7 @@ import { ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConnectOptions } from "typeorm";
 
-import { Environment } from "src/common/enum";
+import { Environment } from "../common/enum";
 
 export const DatabaseProvider: DynamicModule = TypeOrmModule.forRootAsync({
     inject:[ConfigService],

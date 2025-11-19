@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsOptional, IsString, IsUrl } from 'class-validator';
-import { Section } from 'src/modules/section/entities';
+import { Section } from '../../section/entities';
 
 export class UpdatePostDto {
   @IsOptional()

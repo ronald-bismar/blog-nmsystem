@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
-import { Post as PostEntity } from 'src/modules/blog/blog_entity';
-import { BlogsService } from 'src/modules/blog/blogs.service';
+import { Post as PostEntity } from '../blog/blog_entity';
+import { BlogsService } from '../blog/blogs.service';
 import { CreatePostDto, PaginationQueryDto, UpdatePostDto } from './dto';
 
 @Controller('blogs')
