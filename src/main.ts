@@ -2,18 +2,26 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
-async function bootstrap() {
+let server;
+
+async function bootstrapServer() {
   const app = await NestFactory.create(AppModule);
 
   app.useGlobalPipes(new ValidationPipe({
     transform: true,
     whitelist: true,
     forbidNonWhitelisted: true,
-    transformOptions: {
-      enableImplicitConversion: true //Esto es porque los numbers se envian como string, con esto no habra problema se recibirá number
-    }
-  }))
+    transformOptions: { enableImplicitConversion: true }
+  }));
 
-  await app.listen(AppModule.port);
+  await app.init();
+  return app.getHttpAdapter().getInstance();
 }
-bootstrap();
+
+// Esto es lo importante para Vercel
+export default async function handler(req, res) {
+  if (!server) {
+    server = await bootstrapServer();
+  }
+  return server(req, res);
+}
