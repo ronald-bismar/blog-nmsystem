@@ -18,7 +18,6 @@ export class CreatePostDto {
   @IsUrl()
   readonly imagePost: string;
 
-  @IsString()
   @IsNotEmpty()
   readonly section: Section[];
 

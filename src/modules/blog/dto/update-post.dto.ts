@@ -24,7 +24,6 @@ export class UpdatePostDto {
   readonly imagePost?: string;
 
   @IsOptional()
-  @IsString()
   @IsNotEmpty()
   readonly content?: Section[];
 
