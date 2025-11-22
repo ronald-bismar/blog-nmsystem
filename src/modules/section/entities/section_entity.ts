@@ -2,7 +2,7 @@ import { Post } from "src/modules/blog/blog_entity"
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 
 @Entity()
-export class Section{
+export class Section {
 
     @PrimaryGeneratedColumn('uuid')
     id: string
@@ -11,15 +11,15 @@ export class Section{
     image: string
 
     @Column()
-    subtitle:string
+    subtitle: string
 
-    @Column({nullable: false})
-    paragraph:string
+    @Column({ nullable: false })
+    paragraph: string
 
-    @Column({nullable: false})
+    @Column({ nullable: false })
     order: number
 
-    @ManyToOne(type => Post, post => post.section, {cascade: true})
-    @JoinColumn({name: "postId"})
+    @ManyToOne(type => Post, post => post.section)
+    @JoinColumn({ name: "postId" })
     post: Post;
 }
