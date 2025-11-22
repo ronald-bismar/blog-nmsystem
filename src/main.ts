@@ -7,6 +7,27 @@ let server;
 async function bootstrapServer() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors({
+    origin(origin, callback) {
+      const allowedOrigins = [
+        //Para desarrollo
+        'http://127.0.0.1:5501',
+        'http://localhost:3000',
+        //TODO agregar dominio de producción
+      ];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+  });
+
   app.useGlobalPipes(new ValidationPipe({
     transform: true,
     whitelist: true,
@@ -22,6 +43,15 @@ async function bootstrapServer() {
 export default async function handler(req, res) {
   if (!server) {
     server = await bootstrapServer();
+  }
+  if (req.method === 'OPTIONS') {
+    const origin = req.headers.origin || '*';
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,PATCH,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.status(204).end();
+    return;
   }
   return server(req, res);
 }
