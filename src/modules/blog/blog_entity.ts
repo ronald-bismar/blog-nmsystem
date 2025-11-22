@@ -22,7 +22,7 @@ export class Post {
   @Column()
   imagePost: string;
 
-  @OneToMany(type => Section, section => section.post)
+  @OneToMany(type => Section, section => section.post, { cascade: true })
   section: Section[];
 
   @Column()
