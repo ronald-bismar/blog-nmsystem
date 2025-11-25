@@ -19,7 +19,7 @@ export class Section {
     @Column({ nullable: false })
     order: number
 
-    @ManyToOne(type => Post, post => post.section)
+    @ManyToOne(type => Post, post => post.section, { onDelete: 'CASCADE' })
     @JoinColumn({ name: "postId" })
     post: Post;
 }
