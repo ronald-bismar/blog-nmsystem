@@ -28,9 +28,10 @@ export class BlogController {
     updatePost(@Param('id') id: string, @Body() post: UpdatePostDto): Promise<PostEntity> {
         return this.blogService.updatePost(id, post);
     }
+
     @Delete(':id')
     @HttpCode(HttpStatus.NO_CONTENT)
-    deleteBlog(@Param('id') id: string){
-        this.blogService.deletePost(id);
+    async deleteBlog(@Param('id') id: string): Promise<void> {
+        await this.blogService.deletePost(id);
     }
 }
