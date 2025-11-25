@@ -38,6 +38,7 @@ async function bootstrapServer() {
         //Para desarrollo
         'http://127.0.0.1:5501',
         'http://localhost:3000',
+        'https://nextmacrosystem.net/blog.html'
         //TODO agregar dominio de producción
       ];
       if (!origin || allowedOrigins.includes(origin)) {
