@@ -20,16 +20,12 @@ export class BlogController {
     @Post()
     @HttpCode(HttpStatus.NO_CONTENT)
     createPost(@Body() post: CreatePostDto) {
-        console.log('Received post data:', post);
-        console.log('Section data:', post.section);
         this.blogService.createPost(post);
     }
 
     @Put(':id')
     @HttpCode(HttpStatus.NO_CONTENT)
     updatePost(@Param('id') id: string, @Body() post: UpdatePostDto): Promise<PostEntity> {
-        console.log('Received post data:', post);
-        console.log('Section data:', post.content);
         return this.blogService.updatePost(id, post);
     }
 

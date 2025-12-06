@@ -25,7 +25,7 @@ export class UpdatePostDto {
 
   @IsOptional()
   @IsNotEmpty()
-  readonly content?: Section[];
+  readonly section?: Section[];
 
   @IsOptional()
   @IsString()

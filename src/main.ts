@@ -14,6 +14,28 @@
 //     }
 //   }))
 
+//   app.enableCors({
+//     origin(origin, callback) {
+//       const allowedOrigins = [
+//         //Para desarrollo
+//         'http://127.0.0.1:5501',
+//         'http://localhost:3000',
+//         'https://nextmacrosystem.net'
+//         //TODO agregar dominio de producción
+//       ];
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error('Not allowed by CORS'));
+//       }
+//     },
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+//     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+//     credentials: true,
+//     preflightContinue: false,
+//     optionsSuccessStatus: 204
+//   });
+
 //   await app.listen(AppModule.port);
 // }
 // bootstrap();
