@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsUrl } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, IsUrl } from 'class-validator';
 import { Section } from '../../section/entities';
 
 export class CreatePostDto {
@@ -24,6 +24,7 @@ export class CreatePostDto {
   @IsString()
   readonly author: string;
 
+  @IsOptional()
   @IsNotEmpty()
   readonly isDraft: boolean;
 }
