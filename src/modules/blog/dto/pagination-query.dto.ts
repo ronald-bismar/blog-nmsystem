@@ -1,6 +1,7 @@
-import { IsNumber, IsOptional, IsPositive } from "class-validator";
+import { Type } from "class-transformer";
+import { IsBoolean, IsNumber, IsOptional, IsPositive } from "class-validator";
 
-export class PaginationQueryDto{
+export class PaginationQueryDto {
     @IsNumber()
     @IsPositive()
     @IsOptional()
@@ -10,4 +11,9 @@ export class PaginationQueryDto{
     @IsPositive()
     @IsOptional()
     offset: number
+
+    @IsBoolean()
+    @IsOptional()
+    @Type(() => Boolean)
+    isDraft?: boolean;
 }
