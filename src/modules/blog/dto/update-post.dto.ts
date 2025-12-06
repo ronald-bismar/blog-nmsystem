@@ -30,4 +30,8 @@ export class UpdatePostDto {
   @IsOptional()
   @IsString()
   readonly author?: string;
+
+  @IsOptional()
+  @IsNotEmpty()
+  readonly isDraft?: boolean;
 }

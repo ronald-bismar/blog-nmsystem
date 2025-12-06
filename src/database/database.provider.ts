@@ -6,27 +6,30 @@ import { ConnectOptions } from "typeorm";
 import { Environment } from "../common/enum";
 
 export const DatabaseProvider: DynamicModule = TypeOrmModule.forRootAsync({
-    inject:[ConfigService],
-    async useFactory(config: ConfigService){
+    inject: [ConfigService],
+    async useFactory(config: ConfigService) {
         const isDevelopmentEnv = config.get("NODE_ENV") !== Environment.Production;
 
         const dbConfig = {
             type: 'postgres',
             url: config.get('DATABASE_URL'),
+            migrations: ['/migrations/*{.ts,.js}'],
+            migrationsTableName: '_migrations',
+            migrationsRun: true,  // Auto-run migrations,
             // host: config.get('DB_HOST'),
             // port: config.get('DB_PORT'),
             // username: config.get('DB_USER'),
             // password: config.get('DB_PASSWORD'),
             // database: config.get('DB_NAME'),
             autoLoadEntities: true,
-            synchronize: isDevelopmentEnv,            
+            synchronize: isDevelopmentEnv,
             loggin: config.get('DB_LOGGIN') === 'true',
             ssl: config.get('DB_SSL') === 'true',
             extra: {
-                ssl:  config.get('DB_SSL') === 'true'?
-                {
-                    rejectUnauthorized: false,
-                } : null
+                ssl: config.get('DB_SSL') === 'true' ?
+                    {
+                        rejectUnauthorized: false,
+                    } : null
             }
         } as ConnectOptions
 

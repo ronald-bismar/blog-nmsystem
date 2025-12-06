@@ -27,4 +27,7 @@ export class Post {
 
   @Column()
   author: string;
+
+  @Column()
+  isDraft: boolean;
 }

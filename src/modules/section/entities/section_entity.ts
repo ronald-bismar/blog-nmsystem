@@ -1,5 +1,6 @@
-import { Post } from "src/modules/blog/blog_entity"
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+
+import { Post } from "../../blog/blog_entity"
 
 @Entity()
 export class Section {

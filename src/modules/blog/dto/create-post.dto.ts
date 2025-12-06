@@ -23,4 +23,7 @@ export class CreatePostDto {
 
   @IsString()
   readonly author: string;
+
+  @IsNotEmpty()
+  readonly isDraft: boolean;
 }
