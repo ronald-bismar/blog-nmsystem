@@ -18,7 +18,7 @@
 // }
 // bootstrap();
 
-//Habilitar esta seccion para despliegue 
+//Habilitar esta seccion para despliegue
 // ya que la otra seccion solo es para probarlo con el comando:
 // nest start --watch
 
